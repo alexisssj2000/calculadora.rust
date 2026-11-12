@@ -1,17 +1,31 @@
+use std::cmp::Ordering;
+use rand::prelude::*;
+use std::io;
+
 fn main() {
     println!("‡--------------------------------→");
-    println!("Hola, mundo!");
+    println!("‡ Welcome to the Rust Calculator!");
+    println!("‡--------------------------------→");
+    println!("‡ Please Guess the number: ");
+    
+    let secret_number =String::from(&rand::rng().random_range(1..=100).to_string());
+    
+    
+    let mut guess = String::new();
 
-    let nombre = "Alexis";
-    let edad: u8 = 24;
-    result();
-    println!("Hola {}, tienes {} años", nombre, edad);
-}
-fn sumar(a: i32, b: i32) -> i32 {
-    a + b
-}
+    io::stdin()
+        .read_line(&mut guess)
+        .expect("Failed to read input");
+    
+    
 
-fn result() {
-    let resultado = sumar(10, 20);
-    println!("Resultado: {}", resultado);
+    
+    println!("‡ The secret number is: {}", secret_number);
+    println!("‡ You guessed: {guess}");
+
+    match guess.cmp(&secret_number){
+        Ordering::Less => println!("‡ Too small!"),
+        Ordering::Greater => println!("‡ Too big!"),
+        Ordering::Equal => println!("‡ You win!"),
+    }
 }
